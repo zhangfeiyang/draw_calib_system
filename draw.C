@@ -849,9 +849,9 @@ void draw(){
 
 	//--------------Anchor tags------------------
 
-	TLatex *Anchor_tag = new TLatex(Cx-R_anchor*sin(anchor2/180*pi)+ anchor_r + 5*cm,Cx+R_anchor*cos(anchor2/180*pi),"Anchor");
-	Anchor_tag->SetTextSize(0.025);
-	Anchor_tag->Draw();
+	//TLatex *Anchor_tag = new TLatex(Cx-R_anchor*sin(anchor2/180*pi)+ anchor_r + 5*cm,Cx+R_anchor*cos(anchor2/180*pi),"Anchor");
+	//Anchor_tag->SetTextSize(0.025);
+	//Anchor_tag->Draw();
 	
 	//---------------AURORA tags---------------------------
 
