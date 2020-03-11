@@ -71,7 +71,5 @@
 	double spool_W = 32*cm;
 	double spool_H = 20*cm;
 	double spool_L = 40*cm;
-
-
-
+	double R_source = 5*cm;
 

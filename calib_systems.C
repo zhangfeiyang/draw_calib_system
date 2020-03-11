@@ -1,8 +1,8 @@
 void calib_systems()
 {
 //=========Macro generated from canvas: c1/
-//=========  (Fri Mar  6 10:13:20 2020) by ROOT version 6.18/00
-   TCanvas *c1 = new TCanvas("c1", "",120,32,600,1000);
+//=========  (Wed Mar 11 14:04:04 2020) by ROOT version 6.18/00
+   TCanvas *c1 = new TCanvas("c1", "",180,32,600,1000);
    c1->Range(0,0,600,1000);
    c1->SetFillColor(0);
    c1->SetBorderMode(0);
@@ -852,6 +852,57 @@ void calib_systems()
    line->SetLineColor(11);
    line->SetLineWidth(6);
    line->Draw();
+   line = new TLine(238.2153,634.311,361.7847,634.311);
+   line->SetLineWidth(4);
+   line->Draw();
+   line = new TLine(238.2153,634.311,238.2153,594.311);
+   line->SetLineWidth(4);
+   line->Draw();
+   line = new TLine(253.6615,634.311,253.6615,594.311);
+   line->SetLineWidth(4);
+   line->Draw();
+   line = new TLine(361.7847,634.311,361.7847,594.311);
+   line->SetLineWidth(4);
+   line->Draw();
+   line = new TLine(346.3385,634.311,346.3385,594.311);
+   line->SetLineWidth(4);
+   line->Draw();
+   
+   arc = new TArc(238.2153,594.311,5,0,360);
+
+   ci = TColor::GetColor("#ff0000");
+   arc->SetFillColor(ci);
+
+   ci = TColor::GetColor("#ff0000");
+   arc->SetLineColor(ci);
+   arc->Draw();
+   
+   arc = new TArc(253.6615,594.311,5,0,360);
+
+   ci = TColor::GetColor("#ff0000");
+   arc->SetFillColor(ci);
+
+   ci = TColor::GetColor("#ff0000");
+   arc->SetLineColor(ci);
+   arc->Draw();
+   
+   arc = new TArc(361.7847,594.311,5,0,360);
+
+   ci = TColor::GetColor("#ff0000");
+   arc->SetFillColor(ci);
+
+   ci = TColor::GetColor("#ff0000");
+   arc->SetLineColor(ci);
+   arc->Draw();
+   
+   arc = new TArc(346.3385,594.311,5,0,360);
+
+   ci = TColor::GetColor("#ff0000");
+   arc->SetFillColor(ci);
+
+   ci = TColor::GetColor("#ff0000");
+   arc->SetLineColor(ci);
+   arc->Draw();
    line = new TLine(260,844.311,248,844.311);
    line->SetLineWidth(4);
    line->Draw();
@@ -882,7 +933,11 @@ void calib_systems()
    line->SetLineColor(6);
    line->SetLineWidth(4);
    line->Draw();
-   line = new TLine(215.92,664.311,275.2861,574.311);
+   line = new TLine(215.92,664.311,275.2861,664.311);
+   line->SetLineColor(9);
+   line->SetLineWidth(4);
+   line->Draw();
+   line = new TLine(275.2861,664.311,275.2861,574.311);
    line->SetLineColor(9);
    line->SetLineWidth(4);
    line->Draw();
@@ -910,7 +965,11 @@ void calib_systems()
    line->SetLineColor(6);
    line->SetLineWidth(4);
    line->Draw();
-   line = new TLine(384.08,664.311,324.7139,574.311);
+   line = new TLine(384.08,664.311,324.7139,664.311);
+   line->SetLineColor(9);
+   line->SetLineWidth(4);
+   line->Draw();
+   line = new TLine(324.7139,664.311,324.7139,574.311);
    line->SetLineColor(9);
    line->SetLineWidth(4);
    line->Draw();
@@ -1107,11 +1166,11 @@ void calib_systems()
    line->SetLineColor(13);
    line->SetLineWidth(3);
    line->Draw();
-      tex = new TLatex(332.5,812.6443,"ACU");
+      tex = new TLatex(332.5,812.6443,"Automatic Calibration Unit");
    tex->SetTextSize(0.035);
    tex->SetLineWidth(2);
    tex->Draw();
-      tex = new TLatex(118.6523,714.311,"Calibration house");
+      tex = new TLatex(118.6523,734.311,"Calibration house");
    tex->SetTextSize(0.035);
    tex->SetLineWidth(2);
    tex->Draw();
@@ -1119,29 +1178,30 @@ void calib_systems()
    tex->SetTextSize(0.025);
    tex->SetLineWidth(2);
    tex->Draw();
-      tex = new TLatex(325,582.311,"Side cable");
+      tex = new TLatex(325,674.311,"Side cable");
    tex->SetTextSize(0.025);
-   tex->SetTextAngle(35);
    tex->SetLineWidth(2);
    tex->Draw();
       tex = new TLatex(500,514.311,"Bridge");
    tex->SetTextSize(0.035);
    tex->SetLineWidth(2);
    tex->Draw();
-      tex = new TLatex(400,232.5,"ROV");
-   tex->SetTextSize(0.035);
+      tex = new TLatex(350,32.5,"Remotely Operated under-LS Vehicles");
+   tex->SetTextSize(0.03);
+   tex->SetTextAngle(40);
    tex->SetLineWidth(2);
    tex->Draw();
-   TArrow *arrow = new TArrow(400,237.5,360,237.5,0.015,">");
+   TArrow *arrow = new TArrow(440,132.5,360,237.5,0.015,">");
    arrow->SetFillColor(1);
    arrow->SetFillStyle(1001);
+   arrow->SetLineStyle(9);
    arrow->SetLineWidth(3);
    arrow->Draw();
       tex = new TLatex(347.7231,758.311,"ROV guide rail");
    tex->SetTextSize(0.025);
    tex->SetLineWidth(2);
    tex->Draw();
-      tex = new TLatex(61.95036,188.75,"Guide Tube");
+      tex = new TLatex(11.95036,248.75,"Guide Tube Calibration System");
    tex->SetTextSize(0.035);
    tex->SetTextAngle(-45);
    tex->SetLineWidth(2);
@@ -1168,14 +1228,22 @@ void calib_systems()
    arrow->SetLineStyle(9);
    arrow->SetLineWidth(3);
    arrow->Draw();
-      tex = new TLatex(521.2233,373.6988,"CLS");
+      tex = new TLatex(516.2233,458.6988,"Cable Loop System");
    tex->SetTextSize(0.035);
+   tex->SetTextAngle(-75);
    tex->SetLineWidth(2);
    tex->Draw();
-      tex = new TLatex(147.6931,335.1371,"Anchor");
-   tex->SetTextSize(0.025);
+      tex = new TLatex(520.8923,594.311,"source storage");
+   tex->SetTextSize(0.03);
+   tex->SetTextAngle(90);
    tex->SetLineWidth(2);
    tex->Draw();
+   arrow = new TArrow(505.8923,614.311,361.7847,614.311,0.015,">");
+   arrow->SetFillColor(1);
+   arrow->SetFillStyle(1001);
+   arrow->SetLineStyle(9);
+   arrow->SetLineWidth(3);
+   arrow->Draw();
       tex = new TLatex(50,450,"AURORA");
    tex->SetTextSize(0.035);
    tex->SetLineWidth(2);
