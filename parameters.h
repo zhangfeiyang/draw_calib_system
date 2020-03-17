@@ -1,5 +1,5 @@
 	double pi = 3.141592654;
-	double cm = 1;
+	double cm = 1.2;
 
 	int width = 600*cm;
 	int height = 1000*cm;
