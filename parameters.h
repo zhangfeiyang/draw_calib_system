@@ -1,12 +1,14 @@
 	double pi = 3.141592654;
-	double cm = 1.2;
+	double cm = 0.1;
 
 	int width = 600*cm;
 	int height = 1000*cm;
 
+	double R_source = 5*cm;
+
 	double R1 = 177*cm;
 	double R2 = 180*cm;
-	double R3 = 185*cm;
+	double R3 = R2 + 2*R_source;
 
 	double PMT_r1 = 12*cm;
 	double PMT_r2 = 8*cm;
@@ -71,5 +73,4 @@
 	double spool_W = 32*cm;
 	double spool_H = 20*cm;
 	double spool_L = 40*cm;
-	double R_source = 5*cm;
 

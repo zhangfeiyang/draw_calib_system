@@ -143,9 +143,16 @@ void draw(){
 	c1->Range(0,0,width,height);
 
 //------------------------CD-----------------------------------------------
-	TCrown *cr1 = new TCrown(Cx,Cy,R1,R1,100,440);	
-	TCrown *cr2 = new TCrown(Cx,Cy,R2,R2,90 + theta2,450 - theta2);	
-	TCrown *cr3 = new TCrown(Cx,Cy,R3,R3,90 + theta3,450 - theta3);	
+	TEllipse *cr1 = new TEllipse(Cx,Cy,R1,R1,100,440);	
+	TEllipse *cr2 = new TEllipse(Cx,Cy,R2,R2,90 + theta2,450 - theta2);	
+	TEllipse *cr3 = new TEllipse(Cx,Cy,R3,R3,90 + theta3,450 - theta3);	
+
+	double xx[5] = {50*cm,100*cm,100*cm,50*cm,50*cm};
+	double yy[5] = {50*cm,50*cm,100*cm,100*cm,50*cm};
+	TPolyLine *testLine = new TPolyLine(5,xx,yy);
+	testLine->SetLineWidth(5);
+	testLine->Draw();
+
 
 	cr1->SetLineColor(Acrylic_Color);
 	cr2->SetLineColor(GT_Color);
@@ -154,9 +161,14 @@ void draw(){
 	cr1->SetLineWidth(4);
 	cr2->SetLineWidth(4);
 	cr3->SetLineWidth(4);
-	cr1->Draw();
-	cr2->Draw();
-	cr3->Draw();
+
+	cr1->SetFillStyle(0);
+	cr2->SetFillStyle(0);
+	cr3->SetFillStyle(0);
+
+	cr1->Draw("only");
+	cr2->Draw("only");
+	cr3->Draw("only");
 
 //-----------------------Chimney--------------------------------
 
@@ -444,42 +456,42 @@ void draw(){
 
 	double source_storage_D = 2*chimney_W1;
 	double source_storage_Y = (house_Y + spool_Y3)/2;
-	TLine *source_storage_line = new TLine(Cx - source_storage_D/2,source_storage_Y,Cx + source_storage_D/2,source_storage_Y);
-	source_storage_line->SetLineWidth(4);
-	source_storage_line->Draw();
+	//TLine *source_storage_line = new TLine(Cx - source_storage_D/2,source_storage_Y,Cx + source_storage_D/2,source_storage_Y);
+	//source_storage_line->SetLineWidth(4);
+	//source_storage_line->Draw();
 
 	double storage_cable_L = (source_storage_Y - house_Y)*2./3;
-	TLine* storage_S1_cable = new TLine(Cx - source_storage_D/2,source_storage_Y,Cx - source_storage_D/2,source_storage_Y - storage_cable_L);
-	storage_S1_cable->SetLineWidth(4);
-	storage_S1_cable->Draw();
+	//TLine* storage_S1_cable = new TLine(Cx - source_storage_D/2,source_storage_Y,Cx - source_storage_D/2,source_storage_Y - storage_cable_L);
+	//storage_S1_cable->SetLineWidth(4);
+	//storage_S1_cable->Draw();
 
 	TLine* storage_S2_cable = new TLine(Cx - source_storage_D*3/8 ,source_storage_Y,Cx - source_storage_D*3/8,source_storage_Y - storage_cable_L);
 	storage_S2_cable->SetLineWidth(4);
 	storage_S2_cable->Draw();
 
-	TLine* storage_S3_cable = new TLine(Cx + source_storage_D/2,  source_storage_Y,Cx + source_storage_D/2,source_storage_Y - storage_cable_L);
-	storage_S3_cable->SetLineWidth(4);
-	storage_S3_cable->Draw();
+	//TLine* storage_S3_cable = new TLine(Cx + source_storage_D/2,  source_storage_Y,Cx + source_storage_D/2,source_storage_Y - storage_cable_L);
+	//storage_S3_cable->SetLineWidth(4);
+	//storage_S3_cable->Draw();
 
 	TLine* storage_S4_cable = new TLine(Cx + source_storage_D*3/8 ,source_storage_Y,Cx + source_storage_D*3/8,source_storage_Y - storage_cable_L);
 	storage_S4_cable->SetLineWidth(4);
 	storage_S4_cable->Draw();
 
 
-        TArc *storage_S1 = new TArc(Cx - source_storage_D/2 ,source_storage_Y - storage_cable_L ,R_source);
-        storage_S1->SetLineColor(kRed);
-        storage_S1->SetFillColor(kRed);
-        storage_S1->Draw();
+        //TArc *storage_S1 = new TArc(Cx - source_storage_D/2 ,source_storage_Y - storage_cable_L ,R_source);
+        //storage_S1->SetLineColor(kRed);
+        //storage_S1->SetFillColor(kRed);
+        //storage_S1->Draw();
 
         TArc *storage_S2 = new TArc(Cx - source_storage_D*3/8,source_storage_Y - storage_cable_L,R_source);
         storage_S2->SetLineColor(kRed);
         storage_S2->SetFillColor(kRed);
         storage_S2->Draw();
 
-        TArc *storage_S3 = new TArc(Cx + source_storage_D/2 ,source_storage_Y - storage_cable_L,R_source);
-        storage_S3->SetLineColor(kRed);
-        storage_S3->SetFillColor(kRed);
-        storage_S3->Draw();
+        //TArc *storage_S3 = new TArc(Cx + source_storage_D/2 ,source_storage_Y - storage_cable_L,R_source);
+        //storage_S3->SetLineColor(kRed);
+        //storage_S3->SetFillColor(kRed);
+        //storage_S3->Draw();
 
         TArc *storage_S4 = new TArc(Cx + source_storage_D*3/8,source_storage_Y - storage_cable_L,R_source);
         storage_S4->SetLineColor(kRed);
@@ -628,10 +640,12 @@ void draw(){
 	//---------------Guide Tube cables--------------------
 	double R4 = (R2+R3)/2;
 	double theta4 = (theta2 + theta3)/2;
-	TCrown *tube_cur_cable = new TCrown(Cx,Cy,R4,R4,90 + theta4,450 - theta4);
+	//TCrown *tube_cur_cable = new TCrown(Cx,Cy,R4,R4,90 + theta4,450 - theta4);
+	TEllipse *tube_cur_cable = new TEllipse(Cx,Cy,R4,R4,90 + theta4,450 - theta4);
+	tube_cur_cable->SetFillStyle(0);
 	tube_cur_cable->SetLineWidth(4);
 	tube_cur_cable->SetLineColor(GT_Cable_Color);
-	tube_cur_cable->Draw();
+	tube_cur_cable->Draw("only");
 
 	TLine* GT_cable1 = new TLine(spool_X7 + spool_L, spool_Y7 + spool_H/2, Cx - (chimney_W2 + chimney_W3)/2/2 ,spool_Y7 + spool_H/2);
 	TLine* GT_cable2 = new TLine(Cx - (chimney_W2 + chimney_W3)/2/2 ,spool_Y7 + spool_H/2, Cx - (chimney_W2 + chimney_W3)/2/2, (chimney_Y2 + chimney_Y3)/2);
