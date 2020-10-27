@@ -1,5 +1,5 @@
 	double pi = 3.141592654;
-	double cm = 0.1;
+	double cm = 1;
 
 	int width = 600*cm;
 	int height = 1000*cm;
@@ -18,16 +18,18 @@
 
 
 	double theta1 = 10;
-	double theta2 = asin(((R1*sin(theta1/180*pi) + R2-R1))/R2)/pi*180;
-	double theta3 = asin(((R1*sin(theta1/180*pi) + R3-R1))/R3)/pi*180;
+	//double theta2 = asin(((R1*sin(theta1/180*pi) + R2-R1))/R2)/pi*180;
+	//double theta3 = asin(((R1*sin(theta1/180*pi) + R3-R1))/R3)/pi*180;
+	double theta2 = 10;
+	double theta3 = 10;
 	double Cx = width/2.0;
 	double Cy = Cx;
 
 	double chimney_H1 = 100*cm;
 	double chimney_H2 = 50*cm;
 
-	double chimney_W1 = R1*(20./180*pi);
-	double chimney_Y1 = Cy+R1*cos(10./180*pi); 
+	double chimney_W1 = R1*(2*theta1/180*pi);
+	double chimney_Y1 = Cy+R1*cos(theta1/180*pi); 
 
 	double chimney_Y2 = Cy+R2*cos(theta2/180*pi); 
 	double chimney_W2 = chimney_W1 + 6*cm;

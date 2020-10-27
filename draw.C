@@ -147,20 +147,19 @@ void draw(){
 	TEllipse *cr2 = new TEllipse(Cx,Cy,R2,R2,90 + theta2,450 - theta2);	
 	TEllipse *cr3 = new TEllipse(Cx,Cy,R3,R3,90 + theta3,450 - theta3);	
 
-	double xx[5] = {50*cm,100*cm,100*cm,50*cm,50*cm};
-	double yy[5] = {50*cm,50*cm,100*cm,100*cm,50*cm};
-	TPolyLine *testLine = new TPolyLine(5,xx,yy);
-	testLine->SetLineWidth(5);
-	testLine->Draw();
+	//double xx[5] = {50*cm,100*cm,100*cm,50*cm,50*cm};
+	//double yy[5] = {50*cm,50*cm,100*cm,100*cm,50*cm};
+	//TPolyLine *testLine = new TPolyLine(5,xx,yy);
+	//testLine->SetLineWidth(5);
+	//testLine->Draw();
 
-
-	cr1->SetLineColor(Acrylic_Color);
+	//cr1->SetLineColor(Acrylic_Color);
 	cr2->SetLineColor(GT_Color);
 	cr3->SetLineColor(GT_Color);
 
-	cr1->SetLineWidth(4);
-	cr2->SetLineWidth(4);
-	cr3->SetLineWidth(4);
+	cr1->SetLineWidth(2);
+	cr2->SetLineWidth(2);
+	cr3->SetLineWidth(2);
 
 	cr1->SetFillStyle(0);
 	cr2->SetFillStyle(0);
@@ -170,10 +169,19 @@ void draw(){
 	cr2->Draw("only");
 	cr3->Draw("only");
 
+	//---------------Guide Tube cables1--------------------
+	double R4 = (R2+R3)/2;
+	double theta4 = (theta2 + theta3)/2;
+	TEllipse *tube_cur_cable = new TEllipse(Cx,Cy,R4,R4,90 + theta4,450 - theta4);
+	tube_cur_cable->SetFillStyle(0);
+	tube_cur_cable->SetLineWidth(3);
+	tube_cur_cable->SetLineColor(GT_Cable_Color);
+	tube_cur_cable->Draw("only");
+
 //-----------------------Chimney--------------------------------
 
-	TLine *l1 = new TLine(Cx - chimney_W1/2,chimney_Y1,Cy - chimney_W1/2,chimney_Y1 + chimney_H1);
-	TLine *l2 = new TLine(Cx + chimney_W1/2,chimney_Y1,Cy + chimney_W1/2,chimney_Y1 + chimney_H1);
+	TLine *l1 = new TLine(Cx - chimney_W1/2,chimney_Y1 - 1.8*cm,Cy - chimney_W1/2,chimney_Y1 + chimney_H1);
+	TLine *l2 = new TLine(Cx + chimney_W1/2,chimney_Y1 - 2.5*cm,Cy + chimney_W1/2,chimney_Y1 + chimney_H1);
 
 	TLine *l3 = new TLine(Cx - chimney_W2/2,chimney_Y2,Cy - chimney_W2/2,chimney_Y2 + chimney_H2);
 	TLine *l4 = new TLine(Cx + chimney_W2/2,chimney_Y2,Cy + chimney_W2/2,chimney_Y2 + chimney_H2);
@@ -188,68 +196,55 @@ void draw(){
 	l5->SetLineColor(GT_Color);
 	l6->SetLineColor(GT_Color);
 
-	l1->SetLineWidth(4);
+	l1->SetLineWidth(2);
+	l2->SetLineWidth(2);
+	l3->SetLineWidth(2);
+	l4->SetLineWidth(2);
+	l5->SetLineWidth(2);
+	l6->SetLineWidth(2);
+
 	l1->Draw();
-	
-	l2->SetLineWidth(4);
 	l2->Draw();
-	
-	l3->SetLineWidth(4);
 	l3->Draw();
-	
-	l4->SetLineWidth(4);
 	l4->Draw();
-	
-	l5->SetLineWidth(4);
 	l5->Draw();
-	
-	l6->SetLineWidth(4);
 	l6->Draw();
 
+
 //---------------------------calibration house --------------------------------------------
-///
-	TLine *house_bot_l = new TLine(Cx - chimney_W1/2,house_Y,Cx - house_W/2,house_Y);
-	TLine *house_bot_r = new TLine(Cx + chimney_W1/2,house_Y,Cx + house_W/2,house_Y);
-	TLine* house_mid_l = new TLine(Cx - house_W/2,house_Y,Cx - house_W/2,house_Y + house_H);
-	TLine* house_mid_r = new TLine(Cx + house_W/2,house_Y,Cx + house_W/2,house_Y + house_H);
-	TLine* house_top_l = new TLine(Cx - house_W/2,house_Y + house_H,Cx - house_chim_W/2,house_Y + house_H);
-	TLine* house_top_r = new TLine(Cx + house_W/2,house_Y + house_H,Cx + house_chim_W/2,house_Y + house_H);
 
-	house_bot_l->SetLineColor(House_Color);
-	house_bot_r->SetLineColor(House_Color);
-	house_mid_l->SetLineColor(House_Color);
-	house_mid_r->SetLineColor(House_Color);
-	house_top_l->SetLineColor(House_Color);
-	house_top_r->SetLineColor(House_Color);
+	double house_xx[14] = {
+		Cx - chimney_W1/2,
+		Cx - house_W/2,
+		Cx - house_W/2,
+		Cx - house_chim_W/2,
+		Cx - house_chim_W/2,
+		Cx - ACU_W/2 - ACU_shift,
+		Cx - ACU_W/2 - ACU_shift,
+		Cx + ACU_W/2 - ACU_shift,
+		Cx + ACU_W/2 - ACU_shift,
+		Cx + house_chim_W/2,
+		Cx + house_chim_W/2,
+		Cx + house_W/2,
+		Cx + house_W/2,
+		Cx + chimney_W1/2};
+	double house_yy[14] = {
+		house_Y,house_Y,
+		house_Y + house_H,
+		house_Y + house_H,
+		ACU_Y,
+		ACU_Y,
+		ACU_Y+ACU_H,
+		ACU_Y+ACU_H,
+		ACU_Y,ACU_Y,
+		house_Y + house_H,
+		house_Y + house_H,
+		house_Y,house_Y};
 
-	house_bot_l->SetLineWidth(3);
-	house_bot_l->Draw();
-	
-	house_bot_r->SetLineWidth(3);
-	house_bot_r->Draw();
-
-	house_mid_l->SetLineWidth(3);
-	house_mid_l->Draw();
-		
-	house_mid_r->SetLineWidth(3);
-	house_mid_r->Draw();
-
-	house_top_l->SetLineWidth(3);
-	house_top_l->Draw();
-
-	house_top_r->SetLineWidth(3);
-	house_top_r->Draw();
-
-//-----------------house chimney----------------
-
-	TLine* house_chim_l = new TLine(Cx - house_chim_W/2,house_chim_Y,Cx - house_chim_W/2,ACU_Y);
-	TLine* house_chim_r = new TLine(Cx + house_chim_W/2,house_chim_Y,Cx + house_chim_W/2,ACU_Y);
-
-	house_chim_l->SetLineWidth(3);
-	house_chim_r->SetLineWidth(3);
-
-	house_chim_l->Draw();
-	house_chim_r->Draw();
+	TPolyLine* house_lines = new TPolyLine(14,house_xx,house_yy);
+	house_lines->SetLineColor(House_Color);
+	house_lines->SetLineWidth(2);
+	house_lines->Draw();
 
 //---------------ROV guide rail-------------------------
 //
@@ -257,36 +252,10 @@ void draw(){
 	double Guide_rail_L = house_W/4;
 	double Guide_rail_Y = 0.95*house_H + house_Y;
 	TLine *guide_rail = new TLine(Cx - Guide_rail_L/2,Guide_rail_Y,Cx + Guide_rail_L/2,Guide_rail_Y);
-	guide_rail->SetLineWidth(4);
+	guide_rail->SetLineWidth(2);
 	guide_rail->SetLineColor(ROV_Guide_Rail_Color);
 	guide_rail->Draw();
 			
-//-----------------ACU----------------------------------
-
-	TLine* ACU_bot_l = new TLine(Cx - house_chim_W/2,ACU_Y,Cx - ACU_W/2 - ACU_shift,ACU_Y);
-	TLine* ACU_bot_r = new TLine(Cx + house_chim_W/2,ACU_Y,Cx + ACU_W/2 - ACU_shift,ACU_Y);
-	TLine* ACU_mid_l = new TLine(Cx - ACU_W/2 - ACU_shift,ACU_Y,Cx - ACU_W/2 - ACU_shift,ACU_Y + ACU_H);
-	TLine* ACU_mid_r = new TLine(Cx + ACU_W/2 - ACU_shift,ACU_Y,Cx + ACU_W/2 - ACU_shift,ACU_Y + ACU_H);
-	TLine* ACU_top   = new TLine(Cx - ACU_W/2 - ACU_shift,ACU_Y + ACU_H,Cx + ACU_W/2 - ACU_shift,ACU_Y + ACU_H);
-
-	ACU_bot_l->SetLineColor(ACU_Box_Color);
-	ACU_bot_r->SetLineColor(ACU_Box_Color);
-	ACU_mid_l->SetLineColor(ACU_Box_Color);
-	ACU_mid_r->SetLineColor(ACU_Box_Color);
-	ACU_top  ->SetLineColor(ACU_Box_Color);
-
-	ACU_bot_l->SetLineWidth(3);
-	ACU_bot_r->SetLineWidth(3);
-	ACU_mid_l->SetLineWidth(3);
-	ACU_mid_r->SetLineWidth(3);
-	ACU_top->SetLineWidth(3);
-
-	ACU_bot_l->Draw();
-	ACU_bot_r->Draw();
-	ACU_mid_l->Draw();
-	ACU_mid_r->Draw();
-	ACU_top->Draw();
-
 //------------------anchors------------------------------
 
 	TArc *arc1 = new TArc(Cx+R_anchor*sin(anchor1/180*pi),Cx+R_anchor*cos(anchor1/180*pi),anchor_r);
@@ -303,8 +272,8 @@ void draw(){
 	TLine* bridge_l = new TLine(Cx-chimney_W3/2,bridge_Y,Cx-bridge_W,bridge_Y);
 	TLine* bridge_r = new TLine(Cx+chimney_W3/2,bridge_Y,Cx+bridge_W,bridge_Y);
 
-	bridge_l->SetLineWidth(3);
-	bridge_r->SetLineWidth(3);
+	bridge_l->SetLineWidth(2);
+	bridge_r->SetLineWidth(2);
 	bridge_l->Draw();
 	bridge_r->Draw();
 
@@ -318,12 +287,12 @@ void draw(){
 	PMT_PSR->SetFillColor(AURORA_Color);
 	PMT_PSR->Draw();
 
-	TLatex *PMT_PSR_tag1 = new TLatex(Cx - bridge_W+3*cm, bridge_Y + 3*cm+ PMT_PSR_H*0.66,"PMT Power");
-	PMT_PSR_tag1->SetTextSize(0.015);
+	TLatex *PMT_PSR_tag1 = new TLatex(Cx - bridge_W+3*cm, bridge_Y + 1*cm+ PMT_PSR_H*0.66,"Control");
+	PMT_PSR_tag1->SetTextSize(0.025);
 	PMT_PSR_tag1->Draw();
 
-	TLatex *PMT_PSR_tag2 = new TLatex(Cx - bridge_W+3*cm, bridge_Y + 3*cm+ PMT_PSR_H*0.33,"Supply Room");
-	PMT_PSR_tag2->SetTextSize(0.015);
+	TLatex *PMT_PSR_tag2 = new TLatex(Cx - bridge_W+3*cm, bridge_Y + 1*cm+ PMT_PSR_H*0.33,"Room");
+	PMT_PSR_tag2->SetTextSize(0.025);
 	PMT_PSR_tag2->Draw();
 
 	//-------------------------Led-------------------------------------
@@ -403,7 +372,7 @@ void draw(){
 
 	double ROV_caple_l = 25*cm;
 	TLine *ROV_caple = new TLine(ROV_bot_Cx,ROV_bot_Cy - ROV_R, ROV_bot_Cx,ROV_Y-ROV_caple_l);
-	ROV_caple->SetLineWidth(4);;
+	ROV_caple->SetLineWidth(3);;
 	ROV_caple->Draw();
 
 //-----------------------------Spool--------------------
@@ -455,45 +424,25 @@ void draw(){
 //-------------------------Source storage------------------------
 
 	double source_storage_D = 2*chimney_W1;
-	double source_storage_Y = (house_Y + spool_Y3)/2;
-	//TLine *source_storage_line = new TLine(Cx - source_storage_D/2,source_storage_Y,Cx + source_storage_D/2,source_storage_Y);
-	//source_storage_line->SetLineWidth(4);
-	//source_storage_line->Draw();
+	double source_storage_Y = house_Y*0.6 + spool_Y3*0.4;
 
 	double storage_cable_L = (source_storage_Y - house_Y)*2./3;
-	//TLine* storage_S1_cable = new TLine(Cx - source_storage_D/2,source_storage_Y,Cx - source_storage_D/2,source_storage_Y - storage_cable_L);
-	//storage_S1_cable->SetLineWidth(4);
-	//storage_S1_cable->Draw();
 
-	TLine* storage_S2_cable = new TLine(Cx - source_storage_D*3/8 ,source_storage_Y,Cx - source_storage_D*3/8,source_storage_Y - storage_cable_L);
-	storage_S2_cable->SetLineWidth(4);
+	TLine* storage_S2_cable = new TLine(Cx - source_storage_D*0.35 ,source_storage_Y,Cx - source_storage_D*0.35,source_storage_Y - storage_cable_L);
+	storage_S2_cable->SetLineWidth(3);
 	storage_S2_cable->Draw();
 
-	//TLine* storage_S3_cable = new TLine(Cx + source_storage_D/2,  source_storage_Y,Cx + source_storage_D/2,source_storage_Y - storage_cable_L);
-	//storage_S3_cable->SetLineWidth(4);
-	//storage_S3_cable->Draw();
-
-	TLine* storage_S4_cable = new TLine(Cx + source_storage_D*3/8 ,source_storage_Y,Cx + source_storage_D*3/8,source_storage_Y - storage_cable_L);
-	storage_S4_cable->SetLineWidth(4);
+	TLine* storage_S4_cable = new TLine(Cx + source_storage_D*0.35 ,source_storage_Y,Cx + source_storage_D*0.35,source_storage_Y - storage_cable_L);
+	storage_S4_cable->SetLineWidth(3);
 	storage_S4_cable->Draw();
 
 
-        //TArc *storage_S1 = new TArc(Cx - source_storage_D/2 ,source_storage_Y - storage_cable_L ,R_source);
-        //storage_S1->SetLineColor(kRed);
-        //storage_S1->SetFillColor(kRed);
-        //storage_S1->Draw();
-
-        TArc *storage_S2 = new TArc(Cx - source_storage_D*3/8,source_storage_Y - storage_cable_L,R_source);
+        TArc *storage_S2 = new TArc(Cx - source_storage_D*0.35,source_storage_Y - storage_cable_L,R_source);
         storage_S2->SetLineColor(kRed);
         storage_S2->SetFillColor(kRed);
         storage_S2->Draw();
 
-        //TArc *storage_S3 = new TArc(Cx + source_storage_D/2 ,source_storage_Y - storage_cable_L,R_source);
-        //storage_S3->SetLineColor(kRed);
-        //storage_S3->SetFillColor(kRed);
-        //storage_S3->Draw();
-
-        TArc *storage_S4 = new TArc(Cx + source_storage_D*3/8,source_storage_Y - storage_cable_L,R_source);
+        TArc *storage_S4 = new TArc(Cx + source_storage_D*0.35,source_storage_Y - storage_cable_L,R_source);
         storage_S4->SetLineColor(kRed);
         storage_S4->SetFillColor(kRed);
         storage_S4->Draw();
@@ -521,16 +470,15 @@ void draw(){
 //--------------------------cables-----------------------
 
 	//----------------ACU cables---------------------
-	TLine* ACU_cable1 = new TLine(Cx,Cy,Cx,spool_Y1 + spool_H/2);
-	ACU_cable1->SetLineWidth(4);
+	TLine* ACU_cable1 = new TLine(Cx,Cy,Cx,spool_Y1 + spool_H/2 + 2.5*cm);
+	ACU_cable1->SetLineWidth(3);
 	ACU_cable1->SetLineColor(ACU_Cable_Color);
 	ACU_cable1->Draw();
 
-	TLine* ACU_cable2 = new TLine(spool_X2 - spool_L, TurnTable_Y*2/3 + (spool_Y1 + spool_H/2)/3,spool_X2 - spool_L, spool_Y1 + spool_H/2);
-	ACU_cable2->SetLineWidth(4);
+	TLine* ACU_cable2 = new TLine(spool_X2 - spool_L, TurnTable_Y*2/3 + (spool_Y1 + spool_H/2)/3,spool_X2 - spool_L, spool_Y1 + spool_H/2 + 2.5*cm);
+	ACU_cable2->SetLineWidth(3);
 	ACU_cable2->SetLineColor(ACU_Cable_Color);
 	ACU_cable2->Draw();
-
 
 	//-------------------CLS cables-----------------------
 
@@ -543,128 +491,148 @@ void draw(){
 	double central_offset = chimney_W1/2*0.5;;
 	double side_offset = chimney_W1/2*0.8; 
 
-	TLine* spool3_cable1 = new TLine(spool_X3 + spool_L, spool_Y3 + spool_H/2, Cx - central_offset, spool_Y3+spool_H/2);
-	spool3_cable1->SetLineWidth(4);
-	spool3_cable1->SetLineColor(CLS_Cable1_Color);
-	spool3_cable1->Draw();
+	//TLine* spool3_cable1 = new TLine(spool_X3 + spool_L, spool_Y3 + spool_H/2, Cx - central_offset, spool_Y3+spool_H/2);
+	//spool3_cable1->SetLineWidth(4);
+	//spool3_cable1->SetLineColor(CLS_Cable1_Color);
+	//spool3_cable1->Draw();
 
-	TLine* spool3_cable2 = new TLine(Cx - central_offset, spool_Y3+spool_H/2,Cx - central_offset, chimney_Y1);
-	spool3_cable2->SetLineWidth(4);
-	spool3_cable2->SetLineColor(CLS_Cable1_Color);
-	spool3_cable2->Draw();
+	//TLine* spool3_cable2 = new TLine(Cx - central_offset, spool_Y3+spool_H/2,Cx - central_offset, chimney_Y1);
+	//spool3_cable2->SetLineWidth(4);
+	//spool3_cable2->SetLineColor(CLS_Cable1_Color);
+	//spool3_cable2->Draw();
 
-	TLine* spool3_cable3 = new TLine(Cx - central_offset, chimney_Y1,CLS_S1_X,CLS_S1_Y);
-	spool3_cable3->SetLineWidth(4);
-	spool3_cable3->SetLineColor(CLS_Cable1_Color);
-	spool3_cable3->Draw();
+	//TLine* spool3_cable3 = new TLine(Cx - central_offset, chimney_Y1,CLS_S1_X,CLS_S1_Y);
+	//spool3_cable3->SetLineWidth(4);
+	//spool3_cable3->SetLineColor(CLS_Cable1_Color);
+	//spool3_cable3->Draw();
+
+	double spool3_cable_xx[4] = {spool_X3 + spool_L,Cx - central_offset,Cx - central_offset,CLS_S1_X};
+	double spool3_cable_yy[4] = {spool_Y3 + spool_H/2,spool_Y3+spool_H/2,chimney_Y1,CLS_S1_Y};
+	TPolyLine* spool3_cable = new TPolyLine(4,spool3_cable_xx,spool3_cable_yy); 
+	spool3_cable->SetLineWidth(3);
+	spool3_cable->SetLineColor(CLS_Cable1_Color);
+	spool3_cable->Draw();
 	
-	TLine* spool4_cable1 = new TLine(spool_X4 + spool_L, spool_Y4 + spool_H/2, Cx - side_offset, spool_Y4 + spool_H/2);
-	spool4_cable1->SetLineWidth(4);
-	spool4_cable1->SetLineColor(CLS_Cable2_Color);
-	spool4_cable1->Draw();
+	//TLine* spool4_cable1 = new TLine(spool_X4 + spool_L, spool_Y4 + spool_H/2, Cx - side_offset, spool_Y4 + spool_H/2);
+	//spool4_cable1->SetLineWidth(4);
+	//spool4_cable1->SetLineColor(CLS_Cable2_Color);
+	//spool4_cable1->Draw();
 
-	TLine* spool4_cable2 = new TLine(Cx - side_offset, spool_Y4 + spool_H/2, Cx - side_offset, house_Y);
-	spool4_cable2->SetLineWidth(4);
-	spool4_cable2->SetLineColor(CLS_Cable2_Color);
-	spool4_cable2->Draw();
+	//TLine* spool4_cable2 = new TLine(Cx - side_offset, spool_Y4 + spool_H/2, Cx - side_offset, house_Y);
+	//spool4_cable2->SetLineWidth(4);
+	//spool4_cable2->SetLineColor(CLS_Cable2_Color);
+	//spool4_cable2->Draw();
 
-	TLine* spool4_cable3 = new TLine(Cx - side_offset, house_Y,Cx - side_offset, chimney_Y1);
-	spool4_cable3->SetLineWidth(4);
-	spool4_cable3->SetLineColor(CLS_Cable2_Color);
-	spool4_cable3->Draw();
+	//TLine* spool4_cable3 = new TLine(Cx - side_offset, house_Y,Cx - side_offset, chimney_Y1);
+	//spool4_cable3->SetLineWidth(4);
+	//spool4_cable3->SetLineColor(CLS_Cable2_Color);
+	//spool4_cable3->Draw();
 
-	TLine* spool4_cable4 = new TLine(Cx - side_offset, chimney_Y1,anchor2_point_X,anchor2_point_Y);
-	spool4_cable4->SetLineWidth(4);
-	spool4_cable4->SetLineColor(CLS_Cable2_Color);
-	spool4_cable4->Draw();
+	//TLine* spool4_cable4 = new TLine(Cx - side_offset, chimney_Y1,anchor2_point_X,anchor2_point_Y);
+	//spool4_cable4->SetLineWidth(3);
+	//spool4_cable4->SetLineColor(CLS_Cable2_Color);
+	//spool4_cable4->Draw();
 
-	TLine* spool4_cable5 = new TLine(anchor2_point_X,anchor2_point_Y,CLS_S1_X,CLS_S1_Y);
-	spool4_cable5->SetLineWidth(4);
-	spool4_cable5->SetLineColor(CLS_Cable2_Color);
-	spool4_cable5->Draw();
-
-
-	TLine* spool5_cable1 = new TLine(spool_X5 - spool_L, spool_Y5 + spool_H/2, Cx + central_offset, spool_Y5+spool_H/2);
-	spool5_cable1->SetLineWidth(4);
-	spool5_cable1->SetLineColor(CLS_Cable1_Color);
-	spool5_cable1->Draw();
-
-	TLine* spool5_cable2 = new TLine(Cx + central_offset, spool_Y5+spool_H/2,Cx + central_offset, chimney_Y1);
-	spool5_cable2->SetLineWidth(4);
-	spool5_cable2->SetLineColor(CLS_Cable1_Color);
-	spool5_cable2->Draw();
-
-	TLine* spool5_cable3 = new TLine(Cx + central_offset, chimney_Y1,CLS_S2_X,CLS_S2_Y);
-	spool5_cable3->SetLineWidth(4);
-	spool5_cable3->SetLineColor(CLS_Cable1_Color);
-	spool5_cable3->Draw();
+	//TLine* spool4_cable5 = new TLine(anchor2_point_X,anchor2_point_Y,CLS_S1_X,CLS_S1_Y);
+	//spool4_cable5->SetLineWidth(3);
+	//spool4_cable5->SetLineColor(CLS_Cable2_Color);
+	//spool4_cable5->Draw();
 	
-	TLine* spool6_cable1 = new TLine(spool_X6 - spool_L, spool_Y6 + spool_H/2, Cx + side_offset, spool_Y6 + spool_H/2);
-	spool6_cable1->SetLineWidth(4);
-	spool6_cable1->SetLineColor(CLS_Cable2_Color);
-	spool6_cable1->Draw();
+	double spool4_cable_xx[5] = {spool_X4 + spool_L,Cx - side_offset,Cx - side_offset,anchor2_point_X,CLS_S1_X};
+	double spool4_cable_yy[5] = {spool_Y4 + spool_H/2,spool_Y4 + spool_H/2,chimney_Y1,anchor2_point_Y,CLS_S1_Y};
+	TPolyLine* spool4_cable = new TPolyLine(5,spool4_cable_xx,spool4_cable_yy); 
+	spool4_cable->SetLineWidth(3);
+	spool4_cable->SetLineColor(CLS_Cable2_Color);
+	spool4_cable->Draw();
 
-	TLine* spool6_cable2 = new TLine(Cx + side_offset, spool_Y6 + spool_H/2, Cx + side_offset, house_Y);
-	spool6_cable2->SetLineWidth(4);
-	spool6_cable2->SetLineColor(CLS_Cable2_Color);
-	spool6_cable2->Draw();
 
-	TLine* spool6_cable3 = new TLine(Cx + side_offset, house_Y,Cx + side_offset, chimney_Y1);
-	spool6_cable3->SetLineWidth(4);
-	spool6_cable3->SetLineColor(CLS_Cable2_Color);
-	spool6_cable3->Draw();
+	//TLine* spool5_cable1 = new TLine(spool_X5 - spool_L, spool_Y5 + spool_H/2, Cx + central_offset, spool_Y5+spool_H/2);
+	//spool5_cable1->SetLineWidth(4);
+	//spool5_cable1->SetLineColor(CLS_Cable1_Color);
+	//spool5_cable1->Draw();
 
-	TLine* spool6_cable4 = new TLine(Cx + side_offset, chimney_Y1,anchor1_point_X,anchor1_point_Y);
-	spool6_cable4->SetLineWidth(4);
-	spool6_cable4->SetLineColor(CLS_Cable2_Color);
-	spool6_cable4->Draw();
+	//TLine* spool5_cable2 = new TLine(Cx + central_offset, spool_Y5+spool_H/2,Cx + central_offset, chimney_Y1);
+	//spool5_cable2->SetLineWidth(4);
+	//spool5_cable2->SetLineColor(CLS_Cable1_Color);
+	//spool5_cable2->Draw();
 
-	TLine* spool6_cable5 = new TLine(anchor1_point_X,anchor1_point_Y,CLS_S2_X,CLS_S2_Y);
-	spool6_cable5->SetLineWidth(4);
-	spool6_cable5->SetLineColor(CLS_Cable2_Color);
-	spool6_cable5->Draw();
+	//TLine* spool5_cable3 = new TLine(Cx + central_offset, chimney_Y1,CLS_S2_X,CLS_S2_Y);
+	//spool5_cable3->SetLineWidth(4);
+	//spool5_cable3->SetLineColor(CLS_Cable1_Color);
+	//spool5_cable3->Draw();
+	
+	double spool5_cable_xx[4] = {spool_X5 - spool_L,Cx + central_offset,Cx + central_offset,CLS_S2_X};
+	double spool5_cable_yy[4] = {spool_Y5 + spool_H/2,spool_Y5+spool_H/2,chimney_Y1,CLS_S2_Y};
+	TPolyLine* spool5_cable = new TPolyLine(4,spool5_cable_xx,spool5_cable_yy); 
+	spool5_cable->SetLineWidth(3);
+	spool5_cable->SetLineColor(CLS_Cable1_Color);
+	spool5_cable->Draw();
+	
+	
+	//TLine* spool6_cable1 = new TLine(spool_X6 - spool_L, spool_Y6 + spool_H/2, Cx + side_offset, spool_Y6 + spool_H/2);
+	//spool6_cable1->SetLineWidth(4);
+	//spool6_cable1->SetLineColor(CLS_Cable2_Color);
+	//spool6_cable1->Draw();
+
+	//TLine* spool6_cable2 = new TLine(Cx + side_offset, spool_Y6 + spool_H/2, Cx + side_offset, house_Y);
+	//spool6_cable2->SetLineWidth(4);
+	//spool6_cable2->SetLineColor(CLS_Cable2_Color);
+	//spool6_cable2->Draw();
+
+	//TLine* spool6_cable3 = new TLine(Cx + side_offset, house_Y,Cx + side_offset, chimney_Y1);
+	//spool6_cable3->SetLineWidth(4);
+	//spool6_cable3->SetLineColor(CLS_Cable2_Color);
+	//spool6_cable3->Draw();
+
+	//TLine* spool6_cable4 = new TLine(Cx + side_offset, chimney_Y1,anchor1_point_X,anchor1_point_Y);
+	//spool6_cable4->SetLineWidth(4);
+	//spool6_cable4->SetLineColor(CLS_Cable2_Color);
+	//spool6_cable4->Draw();
+
+	//TLine* spool6_cable5 = new TLine(anchor1_point_X,anchor1_point_Y,CLS_S2_X,CLS_S2_Y);
+	//spool6_cable5->SetLineWidth(4);
+	//spool6_cable5->SetLineColor(CLS_Cable2_Color);
+	//spool6_cable5->Draw();
+
+	double spool6_cable_xx[5] = {spool_X6 - spool_L,Cx + side_offset,Cx + side_offset,anchor1_point_X,CLS_S2_X};
+	double spool6_cable_yy[5] = {spool_Y6 + spool_H/2,spool_Y6 + spool_H/2,chimney_Y1,anchor1_point_Y,CLS_S2_Y};
+	TPolyLine* spool6_cable = new TPolyLine(5,spool6_cable_xx,spool6_cable_yy); 
+	spool6_cable->SetLineWidth(3);
+	spool6_cable->SetLineColor(CLS_Cable2_Color);
+	spool6_cable->Draw();
 
 	//------------------ROV cables-------------------
 
 	double ROV_shift = 7*cm;
 	TLine* ROV_cable1 = new TLine(Cx+ROV_shift,Guide_rail_Y,Cx+ROV_shift,chimney_Y1);
-	ROV_cable1->SetLineWidth(4);
+	ROV_cable1->SetLineWidth(3);
 	ROV_cable1->SetLineColor(ROV_Cable_Color);
 	ROV_cable1->Draw();
 
 	TCurlyLine* ROV_cable2 = new TCurlyLine(Cx+ROV_shift,chimney_Y1,ROV_X+ROV_W/2,ROV_Y+ROV_H,0.04,0.004);
-	ROV_cable2->SetLineWidth(4);
+	ROV_cable2->SetLineWidth(3);
 	ROV_cable2->SetLineColor(ROV_Cable_Color);
 	ROV_cable2->Draw();
 
-	//---------------Guide Tube cables--------------------
-	double R4 = (R2+R3)/2;
-	double theta4 = (theta2 + theta3)/2;
-	//TCrown *tube_cur_cable = new TCrown(Cx,Cy,R4,R4,90 + theta4,450 - theta4);
-	TEllipse *tube_cur_cable = new TEllipse(Cx,Cy,R4,R4,90 + theta4,450 - theta4);
-	tube_cur_cable->SetFillStyle(0);
-	tube_cur_cable->SetLineWidth(4);
-	tube_cur_cable->SetLineColor(GT_Cable_Color);
-	tube_cur_cable->Draw("only");
+	//---------------Guide Tube cables2--------------------
+	
 
-	TLine* GT_cable1 = new TLine(spool_X7 + spool_L, spool_Y7 + spool_H/2, Cx - (chimney_W2 + chimney_W3)/2/2 ,spool_Y7 + spool_H/2);
-	TLine* GT_cable2 = new TLine(Cx - (chimney_W2 + chimney_W3)/2/2 ,spool_Y7 + spool_H/2, Cx - (chimney_W2 + chimney_W3)/2/2, (chimney_Y2 + chimney_Y3)/2);
-	TLine* GT_cable3 = new TLine(spool_X8 - spool_L, spool_Y8 + spool_H/2, Cx + (chimney_W2 + chimney_W3)/2/2 ,spool_Y7 + spool_H/2);
-	TLine* GT_cable4 = new TLine(Cx + (chimney_W2 + chimney_W3)/2/2 ,spool_Y7 + spool_H/2, Cx + (chimney_W2 + chimney_W3)/2/2, (chimney_Y2 + chimney_Y3)/2);
-	GT_cable1->SetLineWidth(4);
-	GT_cable2->SetLineWidth(4);
-	GT_cable3->SetLineWidth(4);
-	GT_cable4->SetLineWidth(4);
+	double GT_cable1_xx[3] = {Cx - (chimney_W2 + chimney_W3)/2/2,Cx - (chimney_W2 + chimney_W3)/2/2,spool_X7 + spool_L};
+	double GT_cable1_yy[3] = {(chimney_Y2 + chimney_Y3)/2,spool_Y7 + spool_H/2,spool_Y7 + spool_H/2};
+	TPolyLine* GT_cable1 = new TPolyLine(3,GT_cable1_xx,GT_cable1_yy);
+
+	double GT_cable2_xx[3] = {Cx + (chimney_W2 + chimney_W3)/2/2,Cx + (chimney_W2 + chimney_W3)/2/2,spool_X8 - spool_L};
+	double GT_cable2_yy[3] = {(chimney_Y2 + chimney_Y3)/2,spool_Y7 + spool_H/2,spool_Y7 + spool_H/2};
+	TPolyLine* GT_cable2 = new TPolyLine(3,GT_cable2_xx,GT_cable2_yy);
+
+	GT_cable1->SetLineWidth(3);
+	GT_cable2->SetLineWidth(3);
 
 	GT_cable1->SetLineColor(GT_Cable_Color);
 	GT_cable2->SetLineColor(GT_Cable_Color);
-	GT_cable3->SetLineColor(GT_Cable_Color);
-	GT_cable4->SetLineColor(GT_Cable_Color);
 
 	GT_cable1->Draw();
 	GT_cable2->Draw();
-	GT_cable3->Draw();
-	GT_cable4->Draw();
 
 	//-----------------------AURORA--------------
 	
@@ -721,10 +689,10 @@ void draw(){
 	AURORA_cable4->SetLineWidth(2);
 	AURORA_cable4->Draw();
 
-	TCrown *AURORA_loop_cable1 = new TCrown(Cx,Cy,PMT_R*1.07,PMT_R*1.07,125,180);
+	TCrown *AURORA_loop_cable1 = new TCrown(Cx,Cy,PMT_R*1.07,PMT_R*1.07,125.5,180);
 	AURORA_loop_cable1->SetLineWidth(2);
 	AURORA_loop_cable1->Draw();
-	TCrown *AURORA_loop_cable2 = new TCrown(Cx,Cy,PMT_R*1.02,PMT_R*1.02,120,170);
+	TCrown *AURORA_loop_cable2 = new TCrown(Cx,Cy,PMT_R*1.02,PMT_R*1.02,120.5,170);
 	AURORA_loop_cable2->SetLineWidth(2);
 	AURORA_loop_cable2->Draw();
 
@@ -842,27 +810,30 @@ void draw(){
 
 	//------------------ source storage hold line-----
 	//
-	//seems not good if I add hold lines for source storage
 	//
-	//TLine *shl9 = new TLine(Cx - chimney_W1*5/8,source_storage_Y,Cx - chimney_W1*5/8,house_Y);
-	//TLine *shl_9 = new TLine(Cx + chimney_W1*5/8,source_storage_Y,Cx + chimney_W1*5/8,house_Y);
-	//shl9->SetLineWidth(3);
-	//shl_9->SetLineWidth(3);
-	//shl9->SetLineColor(Hold_Line_Color);
-	//shl_9->SetLineColor(Hold_Line_Color);
+	double sshl_l_xx[3] = {Cx - chimney_W1/2,Cx - chimney_W1/2,Cx - source_storage_D*0.4};
+	double sshl_l_yy[3] = {house_Y,source_storage_Y,source_storage_Y};
+	TPolyLine *sshl_l = new TPolyLine(3,sshl_l_xx,sshl_l_yy);
+        sshl_l->SetLineWidth(4);	
+        sshl_l->SetLineColor(Hold_Line_Color);	
+	sshl_l->Draw();
 
-	//shl9->Draw();
-	//shl_9->Draw();
+	double sshl_r_xx[3] = {Cx + chimney_W1/2,Cx + chimney_W1/2,Cx + source_storage_D*0.4};
+	double sshl_r_yy[3] = {house_Y,source_storage_Y,source_storage_Y};
+	TPolyLine *sshl_r = new TPolyLine(3,sshl_r_xx,sshl_r_yy);
+        sshl_r->SetLineWidth(4);	
+        sshl_r->SetLineColor(Hold_Line_Color);	
+	sshl_r->Draw();
 
 //------------------------Tags------------------------------
 
 	//TLatex *ACU = new TLatex(Cx + ACU_W/4,ACU_Y + ACU_H/3,"ACU");
 	TLatex *ACU = new TLatex(Cx + ACU_W/4,ACU_Y + ACU_H/3,"Automatic Calibration Unit");
-	ACU->SetTextSize(0.035);
+	ACU->SetTextSize(0.03);
 	ACU->Draw();
 
 	TLatex *House = new TLatex(Cx - house_W/2*0.95, house_Y + house_H*0.8,"Calibration house");
-	House->SetTextSize(0.035);
+	House->SetTextSize(0.03);
 	House->Draw();
 
 	//---------------------CLS cable tags---------------
@@ -878,7 +849,7 @@ void draw(){
 
 	//-------------------------------------------------
 	TLatex *Bridge = new TLatex(Cx + bridge_W, bridge_Y ,"Bridge");
-	Bridge->SetTextSize(0.035);
+	Bridge->SetTextSize(0.03);
 	Bridge->Draw();
 
 	//TArrow TArrow(Double_t x1, Double_t y1, Double_t x2, Double_t y2, Float_t arrowsize = 0.050000000000000003, Option_t* option = ">");
@@ -888,8 +859,8 @@ void draw(){
 	ROV->SetTextAngle(40);
 	ROV->Draw();
 	//TArrow* ROV_tag_Arr = new TArrow(ROV_X + ROV_W + tag2ROV,ROV_Y + 0.7*ROV_H/2,ROV_X + ROV_W,ROV_Y + 0.7*ROV_H/2,0.015);
-	TArrow* ROV_tag_Arr = new TArrow(ROV_X + ROV_W + tag2ROV + 40*cm, ROV_Y + 0.5*ROV_H/2 - 100*cm,ROV_X + ROV_W,ROV_Y + 0.7*ROV_H/2,0.015);
-        ROV_tag_Arr->SetLineWidth(3);	
+	TArrow* ROV_tag_Arr = new TArrow(ROV_X + ROV_W + tag2ROV + 40*cm, ROV_Y + 0.5*ROV_H/2 - 100*cm,ROV_X + ROV_W,ROV_Y + 0.7*ROV_H/2,0.015,"|>");
+        ROV_tag_Arr->SetLineWidth(2);	
 	ROV_tag_Arr->SetLineStyle(9);
         ROV_tag_Arr->Draw();	
 
@@ -900,51 +871,47 @@ void draw(){
 	//--------------------GT tags----------------------
 	
 	TLatex *GT = new TLatex(GT_S_X - 130*cm, GT_S_Y+40*cm,"Guide Tube Calibration System");
-	GT->SetTextSize(0.035);
+	GT->SetTextSize(0.03);
 	GT->SetTextAngle(-45);
 	GT->Draw();
 
-	TArrow* GT_tag_Arr1 = new TArrow(GT_S_X - 25*cm, GT_S_Y - 45*cm,Cx + R4*sin((GT_S_theta-5)/180.0*pi),Cy + R4*cos((GT_S_theta-5)/180.0*pi),0.015);
-	GT_tag_Arr1->SetLineWidth(3);
+	TArrow* GT_tag_Arr1 = new TArrow(GT_S_X - 25*cm, GT_S_Y - 45*cm,Cx + R4*sin((GT_S_theta-5)/180.0*pi),Cy + R4*cos((GT_S_theta-5)/180.0*pi),0.015,"|>");
+	GT_tag_Arr1->SetLineWidth(2);
 	GT_tag_Arr1->SetLineStyle(9);
 	GT_tag_Arr1->Draw();
 	
 	//--------------------ACU tags------------------------
 	
 	TLatex *source = new TLatex(Cx - 35*cm ,Cy - 20*cm,"Source");
-	source->SetTextSize(0.035);
+	source->SetTextSize(0.03);
 	source->Draw();
 
 	//------------------CLS tags-----------------------
-	TArrow* CLS_tag_Arr1 = new TArrow(Cx + R1*1.3*sin(70./180*pi),Cy + R1*1.3*cos(70./180*pi),CLS_S2_X*0.5 + (Cx + central_offset)*0.5,CLS_S2_Y*0.5 + (chimney_Y1)*0.5,0.015);
-	CLS_tag_Arr1->SetLineWidth(3);
+	TArrow* CLS_tag_Arr1 = new TArrow(Cx + R1*1.3*sin(70./180*pi),Cy + R1*1.3*cos(70./180*pi),CLS_S2_X*0.5 + (Cx + central_offset)*0.5,CLS_S2_Y*0.5 + (chimney_Y1)*0.5,0.015,"|>");
+	CLS_tag_Arr1->SetLineWidth(2);
 	CLS_tag_Arr1->SetLineStyle(9);
 	CLS_tag_Arr1->Draw();
 	
-	TArrow* CLS_tag_Arr2 = new TArrow(Cx + R1*1.3*sin(70./180*pi),Cy + R1*1.3*cos(70./180*pi),anchor1_point_X*0.3 + CLS_S2_X*0.7,anchor1_point_Y*0.3 + CLS_S2_Y*0.7,0.015);
-	CLS_tag_Arr2->SetLineWidth(3);
+	TArrow* CLS_tag_Arr2 = new TArrow(Cx + R1*1.3*sin(70./180*pi),Cy + R1*1.3*cos(70./180*pi),anchor1_point_X*0.3 + CLS_S2_X*0.7,anchor1_point_Y*0.3 + CLS_S2_Y*0.7,0.015,"|>");
+	CLS_tag_Arr2->SetLineWidth(2);
 	CLS_tag_Arr2->SetLineStyle(9);
 	CLS_tag_Arr2->Draw();
 
 	TLatex *CLS = new TLatex(Cx + R1*1.3*sin(70./180*pi),Cy + R1*1.3*cos(70./180*pi)+80*cm,"Cable Loop System");
-	CLS->SetTextSize(0.035);
+	CLS->SetTextSize(0.03);
 	CLS->SetTextAngle(-75);
 	CLS->Draw();
 
 	//--------------Source storage tag------------
 	
-        //TArrow* CLS_tag_Arr2 = new TArrow(Cx + R1*1.3*sin(70./180*pi),Cy + R1*1.3*cos(70./180*pi),anchor1_point_X*0.3 + CLS_S2_X*0.7,anchor1_point_Y*0.3 + CLS_S2_Y*0.7,0.015);
-        //CLS_tag_Arr2->SetLineWidth(3);
-        //CLS_tag_Arr2->SetLineStyle(9);
-        //CLS_tag_Arr2->Draw();
 
         TLatex *source_storage = new TLatex(Cx + house_W/2 + 30*cm,source_storage_Y-40*cm,"source storage");
         source_storage->SetTextSize(0.03);
 	source_storage->SetTextAngle(90);
         source_storage->Draw();
-        //TArrow* source_storage_tag_Arr = new TArrow(Cx + source_storage_D*3/8 ,source_storage_Y,Cx + house_W/2 + 30*cm,source_storage_Y-40*cm,0.015);
-      TArrow* source_storage_tag_Arr = new TArrow(Cx + house_W/2 + 15*cm,source_storage_Y -20*cm,Cx + source_storage_D*1/2 ,source_storage_Y - storage_cable_L/2,0.015);
-        source_storage_tag_Arr->SetLineWidth(3);
+      
+	TArrow* source_storage_tag_Arr = new TArrow(Cx + house_W/2 + 15*cm,source_storage_Y -20*cm,Cx + source_storage_D*1/2 -5*cm,source_storage_Y - storage_cable_L/2 -5*cm ,0.015,"|>");
+        source_storage_tag_Arr->SetLineWidth(2);
         source_storage_tag_Arr->SetLineStyle(9);
         source_storage_tag_Arr->Draw();
 
@@ -957,11 +924,11 @@ void draw(){
 	//---------------AURORA tags---------------------------
 
 	TLatex *AURORA_Tag = new TLatex(50*cm,450*cm,"AURORA");
-	AURORA_Tag->SetTextSize(0.035);
+	AURORA_Tag->SetTextSize(0.03);
 	AURORA_Tag->Draw();
 
-	TArrow* AURORA_tag_Arr = new TArrow(80*cm,480*cm,100*cm,520*cm,0.015);
-        AURORA_tag_Arr->SetLineWidth(3);
+	TArrow* AURORA_tag_Arr = new TArrow(80*cm,480*cm,100*cm,520*cm,0.015,"|>");
+        AURORA_tag_Arr->SetLineWidth(2);
         AURORA_tag_Arr->Draw();
 
 //-----------------------Save files-----------------------------
